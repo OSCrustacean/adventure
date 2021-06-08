@@ -51,18 +51,30 @@ class Main {
         combatChance = rand.nextInt(4);
         if(combatChance > 2) {
           combat = true;
+          continue DUNGEON;
         }
         System.out.println("A rat scuttles to a hole in the corner and you see an empty room before you.");
         System.out.println("What would you like to do?");
         System.out.println("1. Return to main room");
         System.out.println("2. Wait");
+        System.out.println("3. Drink health potion");
         String input = sc.nextLine();
         if(input.equals("1")) {
           position = "center";
+          combatChance = 0;
           continue DUNGEON;
         }
         else if(input.equals("2")) {
           System.out.println("You wait in the room a while longer...");
+        }
+        else if(input.equals("3")) {
+            if(numHealthPots > 0) {
+              numHealthPots --;
+              System.out.println("\t> You drink a health potion and heal yourself for " + healthPotionHealAmmount + "\n\t You now have " + health + " HP." + "\n\t> You have " + numHealthPots + " health potion(s) left.");
+            }
+            else {
+              System.out.println("You do not have any health potions. Fight enemies for a chance to get one.");
+            }
         }
         else {
           System.out.println("Invalid command");
@@ -73,18 +85,30 @@ class Main {
         combatChance = rand.nextInt(4);
         if(combatChance > 2) {
           combat = true;
+          continue DUNGEON;
         }
         System.out.println("A rat scuttles to a hole in the corner and you see an empty room before you.");
         System.out.println("What would you like to do?");
         System.out.println("1. Return to main room");
         System.out.println("2. Wait");
+        System.out.println("3. Drink health potion");
         String input = sc.nextLine();
         if(input.equals("1")) {
           position = "center";
+          combatChance = 0;
           continue DUNGEON;
         }
         else if(input.equals("2")) {
           System.out.println("You wait in the room a while longer...");
+        }
+        else if(input.equals("3")) {
+            if(numHealthPots > 0) {
+              numHealthPots --;
+              System.out.println("\t> You drink a health potion and heal yourself for " + healthPotionHealAmmount + "\n\t You now have " + health + " HP." + "\n\t> You have " + numHealthPots + " health potion(s) left.");
+            }
+            else {
+              System.out.println("You do not have any health potions. Fight enemies for a chance to get one.");
+            }
         }
         else {
           System.out.println("Invalid command");
@@ -95,18 +119,30 @@ class Main {
         combatChance = rand.nextInt(4);
         if(combatChance > 2) {
           combat = true;
+          continue DUNGEON;
         }
         System.out.println("A rat scuttles to a hole in the corner and you see an empty room before you.");
         System.out.println("What would you like to do?");
         System.out.println("1. Return to main room");
         System.out.println("2. Wait");
+        System.out.println("3. Drink health potion");
         String input = sc.nextLine();
         if(input.equals("1")) {
           position = "center";
+          combatChance = 0;
           continue DUNGEON;
         }
         else if(input.equals("2")) {
           System.out.println("You wait in the room a while longer...");
+        }
+        else if(input.equals("3")) {
+            if(numHealthPots > 0) {
+              numHealthPots --;
+              System.out.println("\t> You drink a health potion and heal yourself for " + healthPotionHealAmmount + "\n\t You now have " + health + " HP." + "\n\t> You have " + numHealthPots + " health potion(s) left.");
+            }
+            else {
+              System.out.println("You do not have any health potions. Fight enemies for a chance to get one.");
+            }
         }
         else {
           System.out.println("Invalid command");
@@ -117,18 +153,30 @@ class Main {
         combatChance = rand.nextInt(4);
         if(combatChance > 2) {
           combat = true;
+          continue DUNGEON;
         }
         System.out.println("A rat scuttles to a hole in the corner and you see an empty room before you.");
         System.out.println("What would you like to do?");
         System.out.println("1. Return to main room");
         System.out.println("2. Wait");
+        System.out.println("3. Drink health potion");
         String input = sc.nextLine();
         if(input.equals("1")) {
           position = "center";
+          combatChance = 0;
           continue DUNGEON;
         }
         else if(input.equals("2")) {
           System.out.println("You wait in the room a while longer...");
+        }
+        else if(input.equals("3")) {
+            if(numHealthPots > 0) {
+              numHealthPots --;
+              System.out.println("\t> You drink a health potion and heal yourself for " + healthPotionHealAmmount + "\n\t You now have " + health + " HP." + "\n\t> You have " + numHealthPots + " health potion(s) left.");
+            }
+            else {
+              System.out.println("You do not have any health potions. Fight enemies for a chance to get one.");
+            }
         }
         else {
           System.out.println("Invalid command");
@@ -155,14 +203,18 @@ class Main {
 
         String input = sc.nextLine();
         if(input.equals("1")) {
-          int damageDealt = rand.nextInt(attackDamage);
+          int damageDealt = rand.nextInt(attackDamage) + 16;
           int damageTaken = en.enemyDamage();
 
           en.takeDamage(damageDealt);
-          health -= damageTaken;
+          if(en.returnHealth() > 0) {
+            health -= damageTaken;
+          }
 
           System.out.println("\t> You attack the " + enemy + " for " + damageDealt + " damage.");
-          System.out.println("\t> You recieve " + damageTaken + " in retaliation!");
+          if(en.returnHealth() > 0) {
+           System.out.println("\t> You recieve " + damageTaken + " in retaliation!"); 
+          }
           
           if(health < 1) {
             System.out.println("You have taken too much damage and cannot go on any longer.");
@@ -180,6 +232,7 @@ class Main {
           }
           else if(input.equals("3")) {
             System.out.println("You run away from the " + enemy);
+            combat = false;
             continue GAME;
           }
           else {

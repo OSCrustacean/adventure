@@ -10,7 +10,7 @@ class Enemy {
   Random rand = new Random();
   
   public Enemy() {
-    health = rand.nextInt(maxHealth);
+    health = rand.nextInt(maxHealth) + 26;
     name = enemies[rand.nextInt(enemies.length)];
   }
 
